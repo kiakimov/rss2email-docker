@@ -11,7 +11,7 @@ RUN mkdir /home/rss2email/.config && \
     ln -s /home/rss2email/.rss2email/rss2email.cfg /home/rss2email/.config/rss2email.cfg && \
     chown -R rss2email:rss2email /home/rss2email/.config
 
-RUN pip3 install feedparser html2text https://github.com/rss2email/rss2email/archive/refs/tags/v3.13.1.zip
+RUN pip3 install feedparser html2text https://github.com/rss2email/rss2email/archive/refs/tags/v3.12.3.zip
 
 CMD "/sbin/my_init"
 VOLUME ["/home/rss2email/.rss2email", "/home/rss2email/.config", "/etc/ssmtp"]
