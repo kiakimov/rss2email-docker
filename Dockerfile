@@ -1,5 +1,5 @@
 # Phusion baseimage comes with cron and a proper init:
-FROM phusion/baseimage:latest
+FROM phusion/baseimage:0.9.22
 
 RUN useradd -ms /bin/bash rss2email
 
