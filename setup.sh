@@ -23,6 +23,7 @@ function create_container() {
     docker create --name=rss2email --volume=$DOCKER_DATA/rss2email/rss2email:/home/rss2email/.rss2email \
            --volume=$DOCKER_DATA/rss2email/config:/home/rss2email/.config \
            --volume=$DOCKER_DATA/rss2email/ssmtp:/etc/ssmtp $IMAGE
+    docker update --restart=always $CONTAINER       
 }
 
 function create_configuration() {
@@ -59,6 +60,7 @@ UseSTARTTLS=Yes
 # Email 'From header's can override the default domain?
 FromLineOverride=yes
 EOF
+    chown -R 1000:1000 $DOCKER_DATA/rss2email
     chmod 600 $DOCKER_DATA/rss2email/ssmtp/ssmtp.conf
 
     # Run 'r2e new' in order to create the initial config file
@@ -84,8 +86,7 @@ if [ $? -eq 0 ]; then
     echo " 4) Start a shell for the rss2email user: docker exec -it rss2email setuser rss2email bash"
     echo "   a) Add a few RSS feeds: r2e add bitcoin \"http://www.reddit.com/r/bitcoin.rss\" your_email@example.com"
     echo "   b) List all the feeds you're watching: r2e list"
-    echo "   d) Test running: r2e run"
-    echo " 5) (optional) docker update --restart=always rss2email"
+    echo "   d) Test running: r2e run --no-send"
     echo ""
     echo "If the test ran successfully, every 15 mins you should now receive emails for updated feeds"
 fi

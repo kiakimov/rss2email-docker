@@ -17,8 +17,7 @@ setup.sh will fetch the docker image from the docker hub, create a data director
      4) Start a shell for the rss2email user: docker exec -it rss2email setuser rss2email bash
        a) Add a few RSS feeds: r2e add bitcoin "http://www.reddit.com/r/bitcoin.rss" your_email@example.com
        b) List all the feeds you're watching: r2e list
-       d) Test running: r2e run
-     5) (optional) docker update --restart=always rss2email   
+       d) Test running: r2e run --no-send
 
     If the test ran successfully, every hour you should now receive emails for updated feeds
 
