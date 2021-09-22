@@ -1,3 +1,4 @@
+IMAGE=kiakimov/rss2email
 DOCKER_DATA=$HOME/docker-data
 CONTAINER=rss2email
 
@@ -21,7 +22,7 @@ function check_requirements() {
 function create_container() {
     docker create --name=rss2email --volume=$DOCKER_DATA/rss2email/rss2email:/home/rss2email/.rss2email \
            --volume=$DOCKER_DATA/rss2email/config:/home/rss2email/.config \
-           --volume=$DOCKER_DATA/rss2email/ssmtp:/etc/ssmtp enigmacurry/rss2email
+           --volume=$DOCKER_DATA/rss2email/ssmtp:/etc/ssmtp $IMAGE
 }
 
 function create_configuration() {
@@ -61,10 +62,10 @@ EOF
     chmod 600 $DOCKER_DATA/rss2email/ssmtp/ssmtp.conf
 
     # Run 'r2e new' in order to create the initial config file
-    docker run --rm --volume=$DOCKER_DATA/rss2email/config:/home/rss2email/.config enigmacurry/rss2email setuser rss2email r2e new
+    docker run --rm --volume=$DOCKER_DATA/rss2email/config:/home/rss2email/.config $IMAGE setuser rss2email r2e new
 
     # Turn on HTML mail
-    docker run --rm --volume=$DOCKER_DATA/rss2email/config:/home/rss2email/.config enigmacurry/rss2email setuser rss2email perl -pi -e 's/html-mail = False/html-mail = True/' /home/rss2email/.config/rss2email.cfg
+    docker run --rm --volume=$DOCKER_DATA/rss2email/config:/home/rss2email/.config $IMAGE setuser rss2email perl -pi -e 's/html-mail = False/html-mail = True/' /home/rss2email/.config/rss2email.cfg
     
 }
 
