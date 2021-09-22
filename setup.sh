@@ -85,6 +85,7 @@ if [ $? -eq 0 ]; then
     echo "   a) Add a few RSS feeds: r2e add bitcoin \"http://www.reddit.com/r/bitcoin.rss\" your_email@example.com"
     echo "   b) List all the feeds you're watching: r2e list"
     echo "   d) Test running: r2e run"
+    echo " 5) Optional step: docker update --restart=always rss2email"
     echo ""
-    echo "If the test ran successfully, every hour you should now receive emails for updated feeds"
+    echo "If the test ran successfully, every 15 mins you should now receive emails for updated feeds"
 fi
